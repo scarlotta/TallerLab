@@ -3,35 +3,60 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        String libros[][] = new String[100][3];
         Menu();
 
     }
     public static void Menu(){
         Scanner teclado = new Scanner(System.in);
-        System.out.println("Ingrese la opcion a realizar: \n [1] Agregar libro  \n [2] Buscar libro \n [3] Mostrar espacios usados \n [4] Mostrar espacios disponibles \n [5] Mostrar toda la coleccion \n [6] Salir");
-        int r = teclado.nextInt();
-        switch (r){
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
+        String[][] libros = new String[100][3];
 
-        }
+        int continuar = 1;
+
+        do {
+
+            System.out.println("Que operacion desea realizar? \n[0]Agregar Libro \n[1]Buscar Libro \n[2]Mostrar Espacios Usados \n[3]Mostrar Espacios Disponibles \n[4] Mostrar Toda la Coleccion");
+            int opcion = teclado.nextInt();
+
+            while (opcion <0 || opcion>4) {
+                System.out.println("Que operacion desea realizar? \n[0]Agregar Libro \n[1]Buscar Libro \n[2]Mostrar Espacios Usados \n[3]Mostrar Espacios Disponibles \n[4] Mostrar Toda la Coleccion");
+                opcion = teclado.nextInt();
+            }
+
+            switch(opcion){
+                case 0:
+                    System.out.println("Por favor introduzca el titulo");
+                    String z = teclado.nextLine();
+                    String titulo = teclado.nextLine();
+                    System.out.println("Por favor introduzca el autor");
+                    String autor = teclado.nextLine();
+                    System.out.println("Por favor introduzca la editorial");
+                    String editorial = teclado.nextLine();
+
+                    agregarLibro(libros, titulo, autor, editorial, totalLibros(libros));
+                    break;
+                case 1:
+                    buscarLibro(libros);
+                    break;
+                case 2:
+                    System.out.println("Espacios ocupados: " + totalLibros(libros));
+                    break;
+                case 3:
+                    System.out.println("Espacios disponibles: " + espaciosDisponibles(libros));
+                    break;
+                case 4:
+                    mostrarTodaColeccion(libros);
+                    break;
+
+            }
+
+            System.out.println("Si desea realizar otra operacion introduzca cualquier numero entero. [0] Para terminar.");
+            continuar = teclado.nextInt();
+        }while (continuar != 0);
+
 
     }
-    public static String[][] crearLibro(){
 
-        return new String[0][];
-    }
+
     public static void agregarLibro(String[][] misLibros, String titulo, String autor, String editorial, int contador){
         String libro[] = new String[]{titulo, autor, editorial};
 
@@ -117,10 +142,6 @@ public class Main {
         }
         return contador;
     }
-    public static void mostrarTotalLibros(){}
-    public static void mostrarEspaciosDisponibles(){
-    }
-    public static void mostrarBusquedaLibroAutor(){}
     public static void mostrarTodaColeccion(String [][] misLibros){
 
         System.out.println("Coleccion de libros completa:");
